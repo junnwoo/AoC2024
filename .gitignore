@@ -1,3 +1,2 @@
-python_code/.venv
-rust_code/*/target
+*/rust_code/target
 
