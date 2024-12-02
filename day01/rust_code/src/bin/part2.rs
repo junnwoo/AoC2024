@@ -17,17 +17,20 @@ fn part2(input_file: File) -> u32 {
     let mut left_numbers: Vec<u32> = vec![];
     let mut right_number_occurances: HashMap<u32, u32> = HashMap::new();
     for line in reader.lines() {
-        let input = match line {
-            Ok(line) => line,
-            Err(error) => panic!("Can't read line, error: {}", error),
-        };
+        let input = line.expect("Could not read lines of input file");
         let mut numbers = input.split_whitespace();
-        let first = numbers.next();
-        let second = numbers.next();
-        let left: u32 = first.as_deref().unwrap().parse().unwrap();
-        let right: u32 = second.as_deref().unwrap().parse().unwrap();
-        left_numbers.push(left);
-        *right_number_occurances.entry(right).or_insert(0) += 1;
+        let left_number = numbers
+            .next()
+            .expect("Could not extract left number")
+            .parse()
+            .expect("Could not parse left number");
+        let right_number = numbers
+            .next()
+            .expect("Could not extract right number")
+            .parse()
+            .expect("Could not parse right number");
+        left_numbers.push(left_number);
+        *right_number_occurances.entry(right_number).or_insert(0) += 1;
     }
     let mut similarity_score: u32 = 0;
     for num in left_numbers.iter() {
