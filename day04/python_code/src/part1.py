@@ -1,6 +1,6 @@
 import argparse
 from pathlib import Path
-
+    
 
 def main(input_file: Path):
     with input_file.open("r") as f:
